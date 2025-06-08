@@ -1,0 +1,193 @@
+/* --- 全局重置 --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 12px; /* px 表示“像素（pixel）”: 基础字号为 10 像素 */
+  font-family: "Open Sans", sans-serif; /* 字体系列  这应该是你从 Google Fonts 得到的其余输出。 */
+  height: 100%;
+  background-color: #e9f5ff;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+h1 {
+  /*  */
+  font-size: 40px; /* 字体大小 */
+  text-align: center;
+  /* text-align:center 居中  text-align:right 居右  text-align:justify 居左 */
+  margin: 0;
+  /* padding: 0px 0; */
+  color: #0979e2;
+  text-shadow: 3px 3px 1px rgb(49, 36, 36);
+  width: 100%;
+  /* text-shadow：为元素内的文本设置阴影 */
+  /* 第一个像素值设置阴影与文本的水平偏移量：阴影水平方向移动的距离（译者注：向右为正值）。
+第二个像素值设置阴影与文本的垂直偏移量：阴影垂直方向移动的距离（译者注：向下为正值）。
+第三个像素值设置阴影的模糊半径。值越大产生的阴影越模糊。
+第四个值设置阴影的基色。 */
+}
+
+p,
+li {
+  font-size: 16px;
+  line-height: 2; /* 行间距 */
+  letter-spacing: 1px; /* 字间距 */
+}
+
+img {
+  display: block; /* 予以块级行为 */
+  zoom: 5%;
+  margin: 0 auto;
+}
+
+/* 修改按钮样式 */
+button {
+  cursor: pointer; /* 添加悬停手势 */
+  text-align: center;
+  width: 100px;
+  border: 2px solid#0979e2;
+}
+
+/* 添加按钮悬停效果增强交互 */
+button:hover {
+  background-color: #f1f1f1;
+  transform: scale(1.02);
+}
+
+.firsthead {
+  width: 100%; /* 多宽 */
+  margin: 0;
+  /* margin（外边距）：是围绕元素边框外侧的空间 margin： 0 auto; 将元素在其父元素中水平居中 */
+  background-color: hsl(228, 62%, 41%);
+  /* 背景颜色 */
+  padding: 0 20px 20px 20px;
+  /* padding（内边距）：是指内容周围的空间。 */
+  border: 2px solid rgb(21, 12, 12);
+  /* border（边框）：是紧接着内边距的实线。 边框的宽度、样式和颜色设置的值 body 四周的一个 5 像素宽的纯黑色边框 */
+  height: 80px;
+  border-top: none; /* 顶部不需要边框 */
+  position: relative; /* 确保元素精确定位 */
+  box-sizing: border-box; /* 边框包含在宽高中 */
+}
+
+.personal {
+  width: 100%;
+  height: 100px;
+  border: 1px solid rgb(21, 12, 12);
+  flex-direction: row;
+  display: flex;
+  align-items: center; /* 垂直居中 */
+}
+
+.city {
+  width: 50%;
+  flex-direction: row;
+  flex: 1; /* 添加此行 */
+  display: flex; /* 添加此行 */
+  justify-content: center; /* 添加此行 - 水平居中按钮 */
+  height: 50px;
+}
+
+.maincontent {
+  color: #2e05f9;
+  height: 100%;
+}
+
+body {
+  background: url("../data/image/6月月历壁纸_PC版.png") center/cover no-repeat
+    fixed;
+  min-height: 100vh; /* 关键：确保最小高度为视口高度 */
+  overflow-y: auto;
+  background-repeat: no-repeat; /* 禁止重复 */
+  background-size: cover;
+  /* 覆盖整个屏幕（保持比例） */
+  background-position: center; /* 居中显示 */
+  /* background-attachment: fixed;  */
+  /* 固定背景（可选）*/
+}
+
+body::before {
+  content: "";
+  position: fixed; /* 固定背景层 */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("../data/image/6月月历壁纸_PC版.png") center/cover no-repeat;
+  z-index: -1; /* 置于底层 */
+}
+
+/* --- 内容区域样式 --- */
+.content {
+  display: none; /* 默认隐藏所有内容区域 */
+  color: #2e05f9;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  margin-top: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  min-height: 50vh; /* 设置最小高度，防止内容区域过小 /
+  height: auto; 
+/ 高度自适应 */
+  height: auto;
+}
+
+.content.active {
+  display: block; /* 只显示当前激活的内容区域 */
+}
+
+/* --- 按钮样式 --- */
+.nav-btn {
+  cursor: pointer;
+  text-align: center;
+  width: 180px; /* 加宽按钮，更易点击 */
+  padding: 10px;
+  border: 2px solid #0979e2;
+  background-color: #ffffff;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.nav-btn:hover {
+  background-color: #047ff3;
+  color: white;
+  transform: scale(1.05);
+}
+
+.nav-btn.active {
+  background-color: #0979e2;
+  color: rgb(231, 231, 231);
+  box-shadow: 0 0 10px rgba(6, 121, 228, 0.5);
+}
+
+/* 添加图表容器样式 */
+.chart-wrapper {
+  min-height: 600px;
+  height: 75vh; /* 使用视口高度单位 */
+  width: 100%;
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.chart-container {
+  height: 100%;
+  width: 100%;
+}
+
+/* 确保内容区域有足够空间 */
+#sports-content {
+  min-height: 80vh;
+}

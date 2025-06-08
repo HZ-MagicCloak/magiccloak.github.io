@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>雷润华的个人网页</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans"
+      rel="stylesheet"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/echarts@5.6.0/dist/echarts.min.js"
+      integrity="sha256-v0oiNSTkC3fDBL7GfhIiz1UfFIgM9Cxp3ARlWOEcB7E="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="firsthead">
+      <h1>个人网页</h1>
+    </div>
+    <img src="../data/image/个人照片.jpg" alt="" class="profile-photo" />
+    <div class="personal">
+      <div class="city">
+        <button class="nav-btn active" data-target="profile">个人简介</button>
+      </div>
+      <div class="city">
+        <button class="nav-btn" data-target="sports">体育数据可视化</button>
+      </div>
+    </div>
+
+    <div id="profile-content" class="content active">
+      <h1>个人简介</h1>
+      <p>姓名：雷润华</p>
+      <p>专业：big大数据</p>
+      <p>性别：男</p>
+      <p>爱好：打羽毛球，玩游戏，看动漫</p>
+      <p>
+        性格：非常话痨，有事没事可能会强行打扰，怒刷存在感（当然，大家找我，我必然是不大可能拒绝的）
+      </p>
+      <div style="margin-top: 20px">
+        <h2>生活</h2>
+        <p>
+          羽毛球爱好者，前不久因为看动漫《强风吹拂》导致入坑长跑，现在也算半个跑步爱好者。
+        </p>
+        <h2>想法</h2>
+        <p>
+          羽毛球简单易学，对初学者的要求不高，大家都可以尝试。（就是羽毛球太能涨价了，希望各位未来大老板把价格打下来）
+        </p>
+        <p>如果你也跑步，大可以叫上我，当然，我也推荐动漫《强风吹拂》。</p>
+      </div>
+      <div>
+        <h2>本科目前学习经历</h2>
+        <p>·调教ai</p>
+        <p>·学习高数和离散，顺便调教ai</p>
+        <p>·学习如何调节ai</p>
+        <p>·最后仍然没有学习大语言模型</p>
+      </div>
+    </div>
+
+    <div id="sports-content" class="content">
+      <h1>体育数据可视化</h1>
+      <div class="chart-wrapper">
+        <div id="chart2" class="chart-container"></div>
+      </div>
+
+      <!-- 下一步按钮容器 -->
+      <div class="next-button-container">
+        <button id="next-btn" class="next-btn">下一个分析图</button>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      // 确保在DOM完全加载后初始化图表
+      document.addEventListener("DOMContentLoaded", function () {
+        // 获取图表容器
+        const chartContainer = document.getElementById("chart2");
+
+        // 确保容器存在
+        if (!chartContainer) {
+          console.error("图表容器未找到");
+          return;
+        }
+
+        // 初始化图表
+        const chart2 = echarts.init(chartContainer);
+
+        // 确保容器有高度
+        if (chartContainer.clientHeight === 0) {
+          console.log("修复容器高度问题");
+          chartContainer.style.height = "600px";
+        }
+
+        // 您的数据
+        const sportCountData = [
+          ["篮球", 873],
+          ["羽球", 837],
+          ["乒乓", 691],
+          ["全民", 597],
+          ["排球", 377],
+          ["竞技", 376],
+          ["田径", 353],
+          ["网球", 207],
+          ["足球", 190],
+          ["游泳", 182],
+          ["滑冰", 8],
+          ["单车", 5],
+          ["极限", 5],
+          ["滑雪", 1],
+          ["马拉松", 1],
+        ];
+
+        // 图表配置
+        const option2 = {
+          title: {
+            text: "体育项目普及度 (场馆支持频次)",
+            left: "center",
+            top: "10px",
+          },
+          tooltip: {
+            trigger: "axis",
+            axisPointer: {
+              type: "shadow",
+            },
+            formatter: "{b}: {c} 次",
+          },
+          grid: {
+            left: "3%",
+            right: "6%",
+            top: "15%",
+            bottom: "12%",
+            containLabel: true,
+          },
+          xAxis: {
+            type: "value",
+            name: "出现频次",
+            nameLocation: "end",
+          },
+          yAxis: {
+            type: "category",
+            data: sportCountData.map((item) => item[0]).reverse(),
+            axisLabel: {
+              interval: 0,
+              fontSize: 14,
+              margin: 10,
+            },
+          },
+          series: [
+            {
+              name: "出现频次",
+              type: "bar",
+              data: sportCountData.map((item) => item[1]).reverse(),
+              itemStyle: {
+                color: function (params) {
+                  const colorList = [
+                    "#0F0D87",
+                    "#2C877D",
+                    "#877741",
+                    "#c23531",
+                    "#2f4554",
+                    "#61a0a8",
+                    "#d48265",
+                    "#91c7ae",
+                    "#749f83",
+                    "#ca8622",
+                    "#bda29a",
+                    "#6e7074",
+                    "#546570",
+                    "#872B85",
+                    "#6B8387",
+                  ];
+                  return colorList[params.dataIndex];
+                },
+              },
+              label: {
+                show: true,
+                position: "right",
+                fontSize: 12,
+              },
+            },
+          ],
+        };
+
+        // 使用配置项显示图表
+        chart2.setOption(option2);
+
+        // 响应式调整
+        window.addEventListener("resize", function () {
+          chart2.resize();
+        });
+
+        // 立即调整尺寸
+        setTimeout(() => {
+          chart2.resize();
+        }, 300);
+
+        // 将图表实例挂载到window以便切换标签时访问
+        window.chart2 = chart2;
+      });
+    </script>
+
+    <script src="../scripts/main.js"></script>
+  </body>
+</html>
